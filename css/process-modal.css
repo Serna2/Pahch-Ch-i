@@ -1,0 +1,242 @@
+/* 
+ * Process Modal Styles for Pahch Ch'i Website
+ * Displays detailed information about each process step
+ */
+
+.process-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.process-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.process-modal {
+    background: linear-gradient(135deg, var(--yellow-light) 0%, var(--white) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.process-modal-overlay.active .process-modal {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.process-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    color: var(--brown-dark);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.process-modal-close:hover {
+    color: var(--yellow-dark);
+    transform: rotate(90deg);
+}
+
+.process-modal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px dashed var(--yellow-main);
+    padding-bottom: 1rem;
+}
+
+.process-modal-step-number {
+    background: linear-gradient(135deg, var(--yellow-main) 0%, var(--yellow-dark) 100%);
+    color: var(--white);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-right: 1.5rem;
+    box-shadow: var(--shadow-md);
+}
+
+.process-modal-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--brown-dark);
+    margin: 0;
+}
+
+.process-modal-content {
+    color: var(--black);
+    animation: fadeContentIn 0.5s ease-out 0.2s both;
+}
+
+@keyframes fadeContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.process-modal-content p {
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+}
+
+.process-modal-content h3 {
+    color: var(--brown-main);
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--yellow-main);
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.process-modal-content h3::before {
+    content: '\f058';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--green-main);
+    margin-right: 10px;
+}
+
+.process-modal-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.process-modal-content li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.process-modal-content li:before {
+    content: '•';
+    color: var(--yellow-dark);
+    font-size: 1.4rem;
+    position: absolute;
+    left: 0;
+    top: -0.3rem;
+}
+
+.process-modal-footer {
+    margin-top: 2rem;
+    text-align: center;
+    font-style: italic;
+    color: var(--brown-main);
+}
+
+/* Animation for modal entrance and exit */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+}
+
+.process-modal-overlay.closing {
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0s 0.3s;
+}
+
+.process-modal-overlay.closing .process-modal {
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .process-modal {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .process-modal-step-number {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+    }
+    
+    .process-modal-title {
+        font-size: 1.5rem;
+    }
+    
+    .process-modal-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .process-modal-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .process-modal-step-number {
+        margin-bottom: 1rem;
+    }
+    
+    .process-modal-close {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    /* Make touch target larger on mobile */
+    .process-modal-close {
+        width: 50px;
+        height: 50px;
+    }
+}

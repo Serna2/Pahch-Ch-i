@@ -26,11 +26,19 @@ function generateQRCode() {
         const title = document.createElement('h3');
         title.textContent = 'Escanea este código para acceder a la página';
         qrContainer.insertBefore(title, qrElement);
-        
-        // Create description
+          // Create description
         const description = document.createElement('p');
         description.textContent = 'Usa la cámara de tu dispositivo móvil para escanear este QR y acceder a la página desde tu celular.';
         qrContainer.insertBefore(description, qrElement);
+        
+        // Create additional info element
+        const additionalInfo = document.createElement('p');
+        additionalInfo.innerHTML = '<i class="fas fa-info-circle"></i> Comparte Pahch Ch\'i con amigos y familia';
+        additionalInfo.style.fontSize = '12px';
+        additionalInfo.style.marginTop = '15px';
+        additionalInfo.style.fontStyle = 'italic';
+        additionalInfo.style.color = 'var(--green-dark)';
+        qrContainer.appendChild(additionalInfo);
         
         // Create close button
         const closeButton = document.createElement('button');
@@ -44,14 +52,13 @@ function generateQRCode() {
     
     // Clear any existing QR code
     document.getElementById('qrcode').innerHTML = '';
-    
-    // Generate new QR code
+      // Generate new QR code
     new QRCode(document.getElementById('qrcode'), {
         text: currentPath,
         width: 200,
         height: 200,
-        colorDark: '#000000',
-        colorLight: '#ffffff',
+        colorDark: '#8d6e63', // Usando el color brown-main
+        colorLight: '#fff9c4', // Usando el color yellow-light
         correctLevel: QRCode.CorrectLevel.H
     });
     

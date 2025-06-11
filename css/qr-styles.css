@@ -11,9 +11,9 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #F8A81C;
+    background-color: var(--yellow-dark);
     color: white;
-    border: none;
+    border: 2px solid var(--yellow-main);
     font-size: 24px;
     cursor: pointer;
     display: flex;
@@ -26,7 +26,8 @@
 
 .qr-button:hover {
     transform: scale(1.1);
-    background-color: #E08F00;
+    background-color: var(--brown-main);
+    border-color: var(--brown-light);
 }
 
 /* QR Container styles */
@@ -35,10 +36,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
-    background-color: #fff;
+    background-color: var(--yellow-light);
     padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius-lg);
+    border: 2px solid var(--yellow-main);
+    box-shadow: var(--shadow-lg);
     text-align: center;
     max-width: 90%;
     width: 350px;
@@ -56,37 +58,65 @@
 
 .qr-container h3 {
     margin-top: 0;
-    color: #333;
-    font-family: 'Poppins', sans-serif;
+    color: var(--brown-dark);
+    font-family: var(--font-heading);
     font-weight: 600;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.qr-container h3:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--yellow-dark);
+    border-radius: 3px;
 }
 
 .qr-container p {
-    color: #666;
+    color: var(--brown-main);
     margin-bottom: 20px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
 }
 
 #qrcode {
-    margin: 0 auto;
+    margin: 15px auto;
     width: 200px;
     height: 200px;
+    padding: 10px;
+    background-color: var(--white);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--yellow-main);
+    box-shadow: var(--shadow-sm);
 }
 
 .qr-close-btn {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: none;
+    background-color: var(--yellow-main);
     border: none;
-    font-size: 24px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    color: #666;
+    color: var(--brown-dark);
+    transition: all 0.3s ease;
 }
 
 .qr-close-btn:hover {
-    color: #333;
+    background-color: var(--brown-main);
+    color: var(--white);
+    transform: rotate(90deg);
 }
 
 /* Overlay when QR is shown */
@@ -97,8 +127,49 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(78, 52, 46, 0.7); /* brown-dark con transparencia */
+    backdrop-filter: blur(3px);
     z-index: -1;
+}
+
+/* Add pineapple-inspired decorative elements */
+.qr-container::after {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-image: radial-gradient(circle, var(--yellow-main) 10%, transparent 10%);
+    background-size: 10px 10px;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+.qr-container::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    background-image: radial-gradient(circle, var(--green-light) 10%, transparent 10%);
+    background-size: 10px 10px;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* Animate QR container entrance */
+@keyframes qrPulse {
+    0% { transform: translate(-50%, -50%) scale(0.95); }
+    70% { transform: translate(-50%, -50%) scale(1.05); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.qr-container.active {
+    opacity: 1;
+    pointer-events: all;
+    animation: qrPulse 0.5s ease forwards;
 }
 
 /* Mobile responsive adjustments */
